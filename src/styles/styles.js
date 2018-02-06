@@ -42,6 +42,13 @@ const style = {
         justifyContent: 'space-between',
         backgroundColor: color.backgroundColor,
     },
+    wrapperTabInColumn: {
+        height: 50,
+        justifyContent: 'center',
+        alignItems: 'center',
+        flex: 1,
+        backgroundColor: color.backgroundColor,
+    },
     wrapperButtonBottom: {
         width: size.deviceWidth,
         height: 60,
@@ -59,10 +66,31 @@ const style = {
         alignItems: 'center',
         justifyContent: 'center',
     },
-
+    buttonTabInColumn: {
+        overflow:"hidden",
+        borderRadius: 13,
+        padding: 10,
+        paddingTop: 5,
+        paddingBottom: 5,
+        backgroundColor: color.mainColor,
+        color: '#FFF',
+        fontSize: 12,
+        fontFamily: 'Montserrat-SemiBold',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    buttonTabInColumnDisable: {
+        color: '#3a3a3a',
+        fontSize: 12,
+        fontFamily: 'Montserrat-Regular',
+    },
     paddingLeftRight: {
         paddingLeft: 20,
         paddingRight: 20,
+    },
+    paddingLeftRightImage: {
+        paddingLeft: 10,
+        paddingRight: 10,
     },
     paddingTopBottom: {
         paddingTop: 20,
@@ -94,24 +122,19 @@ const style = {
         fontSize: 12,
         color: '#3a3a3a'
     },
-    categoryAbsolute: {
+    categoryInImageTopRight: {
         position: 'absolute',
-        backgroundColor: color.mainColor,
+        top: 10,
+        right: 15,
+        backgroundColor: 'rgba(211, 211, 211, 0.7)',
         padding: 5,
         paddingLeft: 10,
         paddingRight: 10,
         borderRadius: 13,
-        overflow: "hidden"
+        overflow: "hidden",
+        fontSize: 12,
+        color: '#3a3a3a'
     },
-    category: {
-        backgroundColor: color.mainColor,
-        padding: 5,
-        paddingLeft: 10,
-        paddingRight: 10,
-        borderRadius: 13,
-        overflow: "hidden"
-    },
-
     shadow: isIOS
         ?
         {
@@ -128,27 +151,54 @@ const style = {
         width: size.deviceWidth - 40,
         height: size.deviceHeight * 3 / 5
     },
+    imageSquare:{
+        borderRadius: 5,
+        width: 60,
+        height: 60,
+    },
     imageFullWidth: {
         width: size.deviceWidth,
         height: size.deviceHeight / 3,
         backgroundColor: color.background
     },
     imageCircleTiny:{
+        borderRadius: 8,
+        width: 16,
+        height: 16
+    },
+    wrapperImageCircleTiny:{
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderRadius: 11,
+        width: 22,
+        height: 22,
+        backgroundColor: color.backgroundColor
+    },
+    wrapperTextAfterListFriend:{
+        justifyContent: 'center',
+        height: 22,
+    },
+    imageCircleNormal:{
         borderRadius: 10,
         width: 20,
         height: 20
     },
-    imageCircleNormal:{
-        borderRadius: 15,
-        width: 30,
-        height: 30
+    imageCircleBig:{
+        borderRadius: 40,
+        width: 80,
+        height: 80
+    },
+    imageItemSearch:{
+        borderRadius: 10,
+        height: size.deviceHeight / 4
     },
     wrapperTextAuthorFeatureImage:{
-        backgroundColor: color.backgroundColor,
+        backgroundColor: color.noneColor,
         padding: 10,
         width: size.deviceWidth - 50,
     },
     wrapperTextInFeatureImage:{
+        width: size.deviceWidth - 40,
         bottom: 30,
         backgroundColor: color.noneColor,
         position: 'absolute',
@@ -194,17 +244,31 @@ const style = {
     textDescriptionLight:{
         color: '#FFF',
         fontFamily: 'Montserrat-Regular',
-        fontSize: 14,
+        fontSize: 13,
+    },
+    badge:{
+        backgroundColor: color.mainColor,
+        height: 10,
+        width: 10,
+        borderRadius: 5,
+        position: 'absolute',
+        top: -2,
+        right: -2,
     },
     textDescriptionGray:{
         color: '#3a3a3a',
         fontFamily: 'Montserrat-Regular',
-        fontSize: 14,
+        fontSize: 13,
     },
     textTitleLight:{
         color: '#FFF',
         fontFamily: 'Montserrat-SemiBold',
         fontSize: 16,
+    },
+    textTitleDark:{
+        color: '#3a3a3a',
+        fontFamily: 'Montserrat-SemiBold',
+        fontSize: 14,
     }
 }
 

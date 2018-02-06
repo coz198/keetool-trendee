@@ -31,7 +31,7 @@ class CarouselContainer extends Component {
                             onPress={() => this.props.navigate('DetailTrendContainer')}
                             style={styles.wrapperCenter} key={i}>
                             <View>
-                                <View style={[styles.imageFeature]}>
+                                <View style={[styles.imageFeature, styles.shadow]}>
                                     <Image style={[styles.imageFeature]} source={{uri: item.url}}/>
                                 </View>
                                 <View style={styles.wrapperTextInFeatureImage}>
@@ -46,8 +46,11 @@ class CarouselContainer extends Component {
                                         </View>
                                         <Text style={styles.textSubDescriptionLight}>Top 5 on Trending</Text>
                                     </View>
-                                    <Text style={[styles.textTitleLight, styles.paddingLine]}>Title</Text>
-                                    <Text style={styles.textDescriptionLight}>Description</Text>
+                                    <View style={styles.paddingLeftRight}>
+
+                                    </View>
+                                    <Text style={[styles.textTitleLight, styles.paddingLine]} numberOfLines={2}>TITLE</Text>
+                                    <Text style={styles.textDescriptionLight} numberOfLines={4}>Description Description Description</Text>
                                 </View>
                                 <Text style={[styles.categoryInImage]}>Category</Text>
                             </View>
@@ -68,9 +71,9 @@ class CarouselContainer extends Component {
                 itemWidth={size.deviceWidth}
                 hasParallaxImages={true}
                 slideStyle={{ width: size.deviceWidth }}
-                autoplay={true}
+                // autoplay={true}
                 inactiveSlideScale={0.9}
-                inactiveSlideOpacity={0.1}
+                inactiveSlideOpacity={0.7}
                 autoplayDelay={1000}
             />
 

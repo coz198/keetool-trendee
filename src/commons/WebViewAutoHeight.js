@@ -47,7 +47,7 @@ a ,p, li, h1, h2, h3, h4, h5, h6, table {
 }
 p{
     font-family: Montserrat-Regular !important;
-    font-size: 15px;
+    font-size: 13px;
 }
 span{
     font-family: Montserrat-Regular !important;
@@ -92,6 +92,9 @@ table:{
 iframe{
     width: 100%;
     height: 150px;
+}
+span{
+    font-size: 13px;
 }
 </style>
 <script >

@@ -10,28 +10,23 @@ import {
     KeyboardAvoidingView
 } from 'react-native';
 import IconDefault from '../../commons/IconDefault'
+import CloseButton from '../../commons/CloseButton'
 import {Container, Content, Item, Form, Input} from 'native-base';
 import styles from "../../styles/styles";
-import Carousel, { ParallaxImage } from 'react-native-snap-carousel';
 import * as chooseImageFunction from './chooseImageFunction';
 
 class IdeaContainer extends Component {
     constructor() {
         super();
         this.state = {
-            imageSource: null,
-            videoSource: '',
+            imageSource: '',
         }
     }
     // FUNCTION CHOICE IMAGE
-    choiceImage() {
+    chooseImage() {
         chooseImageFunction.chooseImage(source => this.setState({imageSource: source}))
     }
 
-    // FUNCTION CHOICE VIDEO
-    choiceVideo() {
-        chooseImageFunction.chooseVideo(source => this.setState({videoSource: source}))
-    }
     render () {
         const {navigate} = this.props.navigation;
         const {goBack} = this.props.navigation;
@@ -39,45 +34,46 @@ class IdeaContainer extends Component {
         return (
             <Container style={styles.wrapperContainer}>
                 <View style={[styles.wrapperHeader, styles.paddingLeftRight]}>
-                    <Text style={styles.textHeaderScreen}>
-                        ACTIVITY IDEA
-                    </Text>
-
-
-                    <TouchableOpacity
-                        activeOpacity={0.5}
-                        onPress={() => goBack()}
-                    >
-                        <IconDefault
-                            name={'Ionicons|md-close'}
-                            style={{paddingLeft :0}}
-                        />
-                    </TouchableOpacity>
+                    <Text style={styles.textHeaderScreen}>ACTIVITY IDEA</Text>
+                    <CloseButton goBack={goBack}/>
                 </View>
-
-                <TouchableOpacity
-                    activeOpacity={1}
-                    onPress={() => this.choiceImage()}
+                <KeyboardAvoidingView
+                    behavior={Platform.OS === 'ios' ? 'position' : undefined}
                 >
-                    <Image
-                        resize={'cover'}
-                        style={[styles.imageFullWidth, styles.marginTopBottom]}
-                        source={imageSource == null ? require('../../../assets/image/defaultImage.png') : imageSource}/>
-                </TouchableOpacity>
-                <Form>
-                    <Item>
-                        <Input style={styles.textDescriptionGray} placeholder="Activity Name" />
-                    </Item>
-                    <Item>
-                        <Input style={styles.textDescriptionGray} placeholder="Description" />
-                    </Item>
-                </Form>
+                    <TouchableOpacity
+                        activeOpacity={1}
+                        onPress={() => this.chooseImage()}
+                        style={styles.imageFullWidth}
+                    >
+                        <Image
+                            resize={'cover'}
+                            style={[styles.imageFullWidth, styles.marginTopBottom]}
+                            source={imageSource == '' ? require('../../../assets/image/defaultImage.png') : imageSource}/>
+                    </TouchableOpacity>
+                    <Form style={{marginTop: 10}}>
+                        <Item style={{marginRight: 15}}>
+                            <Input style={styles.textDescriptionGray} placeholder="Activity Name" />
+                        </Item>
+                        <Item style={{marginRight: 15}}>
+                            <Input style={styles.textDescriptionGray} placeholder="Description" />
+                        </Item>
+                        <Item style={{marginRight: 15}}>
+                            <Input style={styles.textDescriptionGray} placeholder="Suitable For" />
+                        </Item>
+                        <Item style={{marginRight: 15}}>
+                            <Input style={styles.textDescriptionGray} placeholder="Budget" />
+                        </Item>
+                    </Form>
+                </KeyboardAvoidingView>
+
                 <View style={styles.wrapperButtonBottom}>
-                    <TouchableOpacity style={styles.buttonBottom}>
+                    <TouchableOpacity
+                        style={[styles.buttonBottom, styles.shadow]}
+                        activeOpacity={0.9}
+                    >
                         <Text style={styles.textTitleLight}>Let's try this!</Text>
                     </TouchableOpacity>
                 </View>
-
             </Container>
         );
     }

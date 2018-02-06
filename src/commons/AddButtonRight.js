@@ -7,7 +7,7 @@ import {
 import Icon from './Icon';
 import * as color from "../styles/colors";
 
-export default class AddButton extends Component{
+export default class AddButtonRight extends Component{
     render(){
         return(
             <TouchableOpacity
@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
     buttonAdd: {
         position: 'absolute',
         bottom: 20,
-        left: 20,
+        right: 20,
         backgroundColor: color.mainColor,
         width: 50,
         height: 50,
