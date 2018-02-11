@@ -6,16 +6,17 @@ import {
 } from 'react-native';
 import Icon from './Icon';
 import * as color from "../styles/colors";
+import {buttonCircleAbsolute} from "../styles/sizes";
 
-export default class AddButton extends Component{
+export default class CameraButton extends Component{
     render(){
         return(
             <TouchableOpacity
                 activeOpacity={0.9}
-                style={[styles.buttonAdd, styles.shadow]}
+                style={[styles.buttonSearch, styles.shadow]}
                 onPress={this.props.function}
             >
-                <Icon name={'Entypo|plus'} size={35} color={'#FFF'}/>
+                <Icon name={'Entypo|camera'} size={25} color={'#FFF'}/>
             </TouchableOpacity>
         );
     }
@@ -24,16 +25,14 @@ export default class AddButton extends Component{
 const isIOS = Platform.OS === 'ios';
 
 const styles = StyleSheet.create({
-    buttonAdd: {
-        position: 'absolute',
-        bottom: 20,
-        left: 20,
+    buttonSearch: {
+        bottom: 25,
         backgroundColor: color.mainColor,
-        width: 50,
-        height: 50,
+        width: buttonCircleAbsolute,
+        height: buttonCircleAbsolute,
         justifyContent: 'center',
         alignItems: 'center',
-        borderRadius: 25,
+        borderRadius: buttonCircleAbsolute / 2,
     },
     shadow: isIOS
         ?

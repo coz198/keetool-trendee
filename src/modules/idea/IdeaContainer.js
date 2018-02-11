@@ -22,12 +22,13 @@ class IdeaContainer extends Component {
             imageSource: '',
         }
     }
+
     // FUNCTION CHOICE IMAGE
     chooseImage() {
         chooseImageFunction.chooseImage(source => this.setState({imageSource: source}))
     }
 
-    render () {
+    render() {
         const {navigate} = this.props.navigation;
         const {goBack} = this.props.navigation;
         const {imageSource} = this.state;
@@ -35,11 +36,12 @@ class IdeaContainer extends Component {
             <Container style={styles.wrapperContainer}>
                 <View style={[styles.wrapperHeader, styles.paddingLeftRight]}>
                     <Text style={styles.textHeaderScreen}>ACTIVITY IDEA</Text>
-                    <CloseButton goBack={goBack}/>
+                    {/*<CloseButton goBack={goBack}/>*/}
                 </View>
                 <KeyboardAvoidingView
                     behavior={Platform.OS === 'ios' ? 'position' : undefined}
                 >
+
                     <TouchableOpacity
                         activeOpacity={1}
                         onPress={() => this.chooseImage()}
@@ -52,28 +54,27 @@ class IdeaContainer extends Component {
                     </TouchableOpacity>
                     <Form style={{marginTop: 10}}>
                         <Item style={{marginRight: 15}}>
-                            <Input style={styles.textDescriptionGray} placeholder="Activity Name" />
+                            <Input style={styles.textDescriptionGray} placeholder="Activity Name"/>
                         </Item>
                         <Item style={{marginRight: 15}}>
-                            <Input style={styles.textDescriptionGray} placeholder="Description" />
+                            <Input style={styles.textDescriptionGray}  placeholder="Description"/>
                         </Item>
                         <Item style={{marginRight: 15}}>
-                            <Input style={styles.textDescriptionGray} placeholder="Suitable For" />
+                            <Input style={styles.textDescriptionGray} placeholder="Suitable For"/>
                         </Item>
                         <Item style={{marginRight: 15}}>
-                            <Input style={styles.textDescriptionGray} placeholder="Budget" />
+                            <Input style={styles.textDescriptionGray} placeholder="Budget"/>
                         </Item>
                     </Form>
+                    <View style={styles.wrapperButtonBottom}>
+                        <TouchableOpacity
+                            style={[styles.buttonBottom, styles.shadow]}
+                            activeOpacity={0.9}
+                        >
+                            <Text style={styles.textTitleLight}>Let's try this!</Text>
+                        </TouchableOpacity>
+                    </View>
                 </KeyboardAvoidingView>
-
-                <View style={styles.wrapperButtonBottom}>
-                    <TouchableOpacity
-                        style={[styles.buttonBottom, styles.shadow]}
-                        activeOpacity={0.9}
-                    >
-                        <Text style={styles.textTitleLight}>Let's try this!</Text>
-                    </TouchableOpacity>
-                </View>
             </Container>
         );
     }

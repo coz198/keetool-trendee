@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import * as size from './size';
+import * as size from './sizes';
 
 const parallaxStyle = StyleSheet.create({
     container: {
@@ -37,6 +37,7 @@ const parallaxStyle = StyleSheet.create({
         flexDirection: 'column',
         bottom: 20
     },
+
 });
 
 export default parallaxStyle;

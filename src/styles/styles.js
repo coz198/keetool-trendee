@@ -12,6 +12,10 @@ const style = {
         flex: 1,
         backgroundColor: '#FFF',
     },
+    wrapperSpace: {
+        height :20,
+        backgroundColor: color.noneColor,
+    },
     wrapperRowSpaceBetween: {
         flexDirection: 'row',
         justifyContent: 'space-between',
@@ -42,6 +46,12 @@ const style = {
         justifyContent: 'space-between',
         backgroundColor: color.backgroundColor,
     },
+    wrapperSearchBar: {
+        borderRadius: 5,
+        height: 40,
+        width: size.deviceWidth - 40,
+        backgroundColor: '#eaeaea',
+    },
     wrapperTabInColumn: {
         height: 50,
         justifyContent: 'center',
@@ -51,9 +61,8 @@ const style = {
     },
     wrapperButtonBottom: {
         width: size.deviceWidth,
+        marginTop: 20,
         height: 60,
-        position: 'absolute',
-        bottom: 0,
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: color.noneColor,
@@ -66,10 +75,11 @@ const style = {
         alignItems: 'center',
         justifyContent: 'center',
     },
+
     buttonTabInColumn: {
         overflow:"hidden",
         borderRadius: 13,
-        padding: 10,
+        padding: 15,
         paddingTop: 5,
         paddingBottom: 5,
         backgroundColor: color.mainColor,
@@ -80,9 +90,17 @@ const style = {
         justifyContent: 'center',
     },
     buttonTabInColumnDisable: {
-        color: '#3a3a3a',
+        overflow:"hidden",
+        borderRadius: 13,
+        padding: 15,
+        paddingTop: 5,
+        paddingBottom: 5,
+        backgroundColor: color.noneColor,
+        color: color.disableColor,
         fontSize: 12,
-        fontFamily: 'Montserrat-Regular',
+        fontFamily: 'Montserrat-SemiBold',
+        alignItems: 'center',
+        justifyContent: 'center',
     },
     paddingLeftRight: {
         paddingLeft: 20,
@@ -122,6 +140,16 @@ const style = {
         fontSize: 12,
         color: '#3a3a3a'
     },
+    category: {
+        backgroundColor: 'rgba(211, 211, 211, 0.7)',
+        padding: 5,
+        paddingLeft: 10,
+        paddingRight: 10,
+        borderRadius: 13,
+        overflow: "hidden",
+        fontSize: 12,
+        color: '#3a3a3a'
+    },
     categoryInImageTopRight: {
         position: 'absolute',
         top: 10,
@@ -144,17 +172,25 @@ const style = {
         }
         :
         {
-            elevation: 1,
+
         },
     imageFeature:{
         borderRadius: 20,
         width: size.deviceWidth - 40,
-        height: size.deviceHeight * 3 / 5
+        height: size.deviceHeight * 2 / 3
+    },
+    gradientImageFeature:{
+        borderRadius: 20,
+        width: size.deviceWidth - 40,
+        height: size.deviceHeight * 2 / 9
+    },
+    wrapperLogoDrawer:{
+        height: size.deviceHeight / 3
     },
     imageSquare:{
         borderRadius: 5,
-        width: 60,
-        height: 60,
+        width: 120,
+        height: 120,
     },
     imageFullWidth: {
         width: size.deviceWidth,
@@ -162,9 +198,10 @@ const style = {
         backgroundColor: color.background
     },
     imageCircleTiny:{
-        borderRadius: 8,
         width: 16,
-        height: 16
+        height: 16,
+        borderRadius: 8,
+
     },
     wrapperImageCircleTiny:{
         alignItems: 'center',
@@ -191,6 +228,11 @@ const style = {
     imageItemSearch:{
         borderRadius: 10,
         height: size.deviceHeight / 4
+    },
+    gradientImageSearch:{
+        width: size.deviceWidth - 20,
+        borderRadius: 10,
+        height: size.deviceHeight / 12
     },
     wrapperTextAuthorFeatureImage:{
         backgroundColor: color.noneColor,
@@ -245,6 +287,9 @@ const style = {
         color: '#FFF',
         fontFamily: 'Montserrat-Regular',
         fontSize: 13,
+    },
+    inputLogin:{
+        width: size.deviceWidth * 0.8,
     },
     badge:{
         backgroundColor: color.mainColor,

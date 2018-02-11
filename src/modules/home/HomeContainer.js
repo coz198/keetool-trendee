@@ -5,19 +5,56 @@ import {
     TouchableOpacity,
     View,
     Platform,
-    StyleSheet,
-    Dimensions,
-    KeyboardAvoidingView
+    FlatList,
+    StatusBar
 } from 'react-native';
 import {Container} from 'native-base';
-import IconDefault from '../../commons/IconDefault';
 import styles from "../../styles/styles";
-import SearchButton from "../../commons/SearchButton";
-import AddButton from "../../commons/AddButton";
 import CarouselContainer from "./CarouselContainer";
 import {connect} from 'react-redux';
+import Loading from '../../commons/Loading';
 import {bindActionCreators} from 'redux';
 import * as homeAction from './homeAction';
+
+const category = [
+    {
+        "id" : 0,
+        "title" : "alone"
+    },
+    {
+        "id" : 1,
+        "title" : "couple"
+    },
+    {
+        "id" : 2,
+        "title" : "small group"
+    },
+    {
+        "id" : 3,
+        "title" : "large group"
+    },
+    {
+        "id" : 4,
+        "title" : "bleand"
+    },
+    {
+        "id" : 5,
+        "title" : "forest"
+    },
+    {
+        "id" : 6,
+        "title" : "boy"
+    },
+    {
+        "id" : 7,
+        "title" : "girl"
+    },
+    {
+        "id" : 8,
+        "title" : "adult"
+    },
+
+]
 
 class HomeContainer extends Component {
     constructor() {
@@ -25,24 +62,40 @@ class HomeContainer extends Component {
         this.state = {
             modalIdea: false,
             modalIDetailTrend: false,
+            category: 0,
+            isLoadingCategory: false
         }
     }
-    componentWillMount() {
-        this.props.homeAction.getData();
+
+    componentDidMount() {
+        this.props.homeAction.getListTrend(1);
+    }
+
+    isLoading() {
+        this.setState({isLoadingCategory: true});
+        setTimeout(() => this.setState({isLoadingCategory: false}), 100);
+    }
+
+    chooseCategory(id){
+        this.setState({category: id})
+        this.isLoading()
     }
 
     render () {
         const {navigate} = this.props.navigation;
+        const {isLoadingCategory} = this.state;
+        const {data} = this.props;
         return (
             <Container style={styles.wrapperContainer}>
+                <StatusBar barStyle={'dark-content'} backgroundColor={'#FFF'}/>
                 <View style={[styles.wrapperHeader, styles.paddingLeftRight]}>
-                    <TouchableOpacity>
-                        <IconDefault
-                            name={'MaterialIcons|menu'}
-                            style={{paddingLeft :0}}
-                        />
+                    <TouchableOpacity onPress={() => {}}>
+                        <Image
+                            resizeMode={'cover'}
+                            style={[styles.imageCircleNormal, styles.shadow]}
+                            source={{uri: ''}}/>
                     </TouchableOpacity>
-                    <Text style={styles.textLogo}>TRENDEE</Text>
+                    <Text style={styles.textLogo}>SPREADY</Text>
 
                     <TouchableOpacity
                         activeOpacity={0.9}
@@ -55,14 +108,35 @@ class HomeContainer extends Component {
                         <View style={styles.badge}/>
                     </TouchableOpacity>
                 </View>
-
-                <View style={{paddingTop: 20}}>
-                    <CarouselContainer
-                        navigate={navigate}
-                        data={this.props.data}/>
+                <View style={{justifyContent: 'center'}}>
+                    <FlatList
+                        horizontal={true}
+                        showsHorizontalScrollIndicator={false}
+                        data={data}
+                        ListFooterComponent={
+                            <View style={{width: 10}}/>
+                        }
+                        renderItem={({item}) =>
+                            <TouchableOpacity
+                                activeOpacity={0.9}
+                                onPress={() => this.chooseCategory(item.id)}
+                                style={{justifyContent: 'center'}}>
+                                <Text style={[ category[0] ? {marginLeft: 20} :  {marginLeft: 0} , item.id == this.state.category ? styles.buttonTabInColumn : styles.buttonTabInColumnDisable]}>{item.title.toUpperCase()}</Text>
+                            </TouchableOpacity>
+                        }
+                    />
                 </View>
-                <SearchButton function={() => navigate('SearchContainer')}/>
-                <AddButton function={() => navigate('IdeaContainer')}/>
+                <View style={[{flex: 1}, styles.wrapperCenter]}>
+                    {/* {
+                        isLoadingCategory
+                            ?
+                            <Loading/>
+                            :
+                            <CarouselContainer
+                                navigate={navigate}
+                                data={this.props.data}/>
+                    } */}
+                </View>
             </Container>
 
 

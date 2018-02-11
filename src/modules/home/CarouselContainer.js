@@ -11,28 +11,44 @@ import {
     KeyboardAvoidingView
 } from 'react-native';
 import IconDefault from '../../commons/IconDefault'
+import Gradient from '../../commons/Gradient'
+import StatisticalTrend from '../../commons/StatisticalTrend'
 import styles from "../../styles/styles";
 import * as size from "../../styles/sizes";
 import Carousel, { ParallaxImage } from 'react-native-snap-carousel';
-
 
 class CarouselContainer extends Component {
     render () {
         return (
             <Carousel
                 loop={true}
-                layout={'stack'}
-                layoutCardOffset={10}
+                layout={'default'}
+                sliderWidth={size.deviceWidth}
+                itemWidth={size.deviceWidth}
+                hasParallaxImages={true}
+                slideStyle={{ width: size.deviceWidth }}
+                autoplay={true}
+                inactiveSlideScale={0.9}
+                inactiveSlideOpacity={0.7}
+                autoplayDelay={500}
                 data={this.props.data}
-                renderItem={({item, i}) => {
+                renderItem={({item, i}, parallaxProps) => {
                     return (
                         <TouchableOpacity
                             activeOpacity={1}
                             onPress={() => this.props.navigate('DetailTrendContainer')}
-                            style={styles.wrapperCenter} key={i}>
+                            style={[styles.wrapperCenter, {paddingTop: 20}]} key={i}>
                             <View>
                                 <View style={[styles.imageFeature, styles.shadow]}>
-                                    <Image style={[styles.imageFeature]} source={{uri: item.url}}/>
+                                    <ParallaxImage
+                                        source={{ uri: item.url }}
+                                        containerStyle={styles.imageFeature}
+                                        style={styles.imageFeature}
+                                        parallaxFactor={0.4}
+                                        {...parallaxProps}
+                                    />
+                                    {/*<Image style={styles.imageFeature} source={{uri: item.url}}/>*/}
+                                    <Gradient style={styles.gradientImageFeature}/>
                                 </View>
                                 <View style={styles.wrapperTextInFeatureImage}>
                                     <View style={styles.wrapperRowCenterVertical}>
@@ -55,26 +71,20 @@ class CarouselContainer extends Component {
                                 <Text style={[styles.categoryInImage]}>Category</Text>
                             </View>
 
-
-                            <View style={[styles.wrapperRowCenterVertical, styles.wrapperTextAuthorFeatureImage]}>
-                                <Image
-                                    resizeMode={'cover'}
-                                    source={{uri: item.url}}
-                                    style={[styles.imageCircleTiny, {marginRight: 5}]}/>
-                                <Text style={styles.textDescriptionGray}>Author</Text>
+                            <View style={[styles.wrapperRowSpaceBetween, styles.wrapperTextAuthorFeatureImage]}>
+                                <View style={styles.wrapperRowCenterVertical}>
+                                    <Image
+                                        resizeMode={'cover'}
+                                        source={{uri: item.url}}
+                                        style={[styles.imageCircleTiny, {marginRight: 5}]}/>
+                                    <Text style={styles.textDescriptionGray}>Author</Text>
+                                </View>
+                                <StatisticalTrend/>
                             </View>
                         </TouchableOpacity>
                     );
                 }}
-                sliderWidth={size.deviceWidth}
-                inactiveSlideShift={10}
-                itemWidth={size.deviceWidth}
-                hasParallaxImages={true}
-                slideStyle={{ width: size.deviceWidth }}
-                // autoplay={true}
-                inactiveSlideScale={0.9}
-                inactiveSlideOpacity={0.7}
-                autoplayDelay={1000}
+
             />
 
         );
