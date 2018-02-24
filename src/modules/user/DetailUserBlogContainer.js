@@ -56,7 +56,7 @@ class DetailUserBlogContainer extends Component {
                                 source={{uri: 'https://images.pexels.com/photos/433398/pexels-photo-433398.jpeg?w=940&h=650&auto=compress&cs=tinysrgb'}}
                             />
                             <View style={[styles.wrapperTextInFeatureImage, {bottom: 0}]}>
-                                <FlatList
+                                {/* <FlatList
                                     ref="listRef"
                                     horizontal={true}
                                     showsVerticalScrollIndicator={false}
@@ -76,7 +76,7 @@ class DetailUserBlogContainer extends Component {
                                                 <Image source={{uri: item.url}} style={[styles.imageCircleNormal]}/>
                                             </TouchableOpacity>
                                         )
-                                    }}/>
+                                    }}/> */}
                             </View>
                         </View>
                     )}
@@ -114,8 +114,6 @@ class DetailUserBlogContainer extends Component {
                         />
                     </View>
                 </ParallaxScrollView>
-
-
             </Container>
         );
     }

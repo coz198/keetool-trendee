@@ -6,20 +6,14 @@ export function getListTrend(page) {
         dispatch({
             type: types.BEGIN_GET_LIST_TREND
         });
-        console.log("begin")
         homeApi.listTrendApi(page)
             .then(function (res) {
                 dispatch({
                     type: types.GET_LIST_TREND_SUCCESS,
                     data: res.data.topics
                 });
-                console.log(res.data.topicss)
-                console.log("sucs")
-                
             })
             .catch(function (error) {
-                console.log("fail")
-                
                 throw (error);
             });
     }
@@ -65,20 +59,21 @@ export function getListTrend(page) {
 //     }
 // }
 
-// export function getMoreListBlog(page) {
-//     return (dispatch) => {
-//         dispatch({
-//             type: types.BEGIN_GET_MORE_LIST_TREND
-//         });
-//         homeApi.listTrendApi(page)
-//             .then(function (res) {
-//                 dispatch({
-//                     type: types.GET_MORE_LIST_TREND_SUCCESS,
-//                     blogs: res.data.blogs,
-//                 });
-//             })
-//             .catch(function (error) {
-//                 throw (error);
-//             });
-//     }
-// }
+export function getMoreListTrend(page) {
+    return (dispatch) => {
+        dispatch({
+            type: types.BEGIN_GET_MORE_LIST_TREND
+        });
+        homeApi.listTrendApi(page)
+            .then(function (res) {
+                dispatch({
+                    type: types.GET_MORE_LIST_TREND_SUCCESS,
+                    data: res.data.topics,
+                });
+                console.log(res.data.topics)
+            })
+            .catch(function (error) {
+                throw (error);
+            });
+    }
+}

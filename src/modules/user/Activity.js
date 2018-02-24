@@ -41,7 +41,7 @@ class Activity extends Component {
                             style={styles.imageItemSearch}
                         />
                         <View style={[{marginTop: 5}, styles.wrapperRowSpaceBetween]}>
-                            <FlatList
+                            {/* <FlatList
                                 ref="listRef"
                                 horizontal={true}
                                 showsVerticalScrollIndicator={false}
@@ -62,7 +62,7 @@ class Activity extends Component {
                                             <Image source={{uri: item.url}} style={[styles.imageCircleNormal]}/>
                                         </TouchableOpacity>
                                     )
-                                }}/>
+                                }}/> */}
                             <StatisticalTrend/>
                         </View>
 

@@ -33,21 +33,21 @@ export default function homeReducer(state = initialState.home, action) {
         //             isLoadingSearch: false,
         //         }
         //     };
-        // case types.BEGIN_GET_MORE_LIST_BLOG:
-        //     return {
-        //         ...state,
-        //         ...{
-        //             isLoadingMore: true,
-        //         }
-        //     };
-        // case types.GET_MORE_LIST_BLOG_SUCCESS:
-        //     return {
-        //         ...state,
-        //         ...{
-        //             blogs: [...state.blogs, ...action.blogs],
-        //             isLoadingMore: false,
-        //         }
-        //     };
+        case types.BEGIN_GET_MORE_LIST_TREND:
+            return {
+                ...state,
+                ...{
+                    isLoadingMore: true,
+                }
+            };
+        case types.GET_MORE_LIST_TREND_SUCCESS:
+            return {
+                ...state,
+                ...{
+                    data: [...state.data, ...action.data],
+                    isLoadingMore: false,
+                }
+            };
 
         // case types.BEGIN_REFRESH_NEW_FEED :
         //     return {

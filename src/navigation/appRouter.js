@@ -62,6 +62,8 @@ export const TabNavigatorBottomStyle = {
     },
     initialRouteName: 'HomeContainer',
     tabBarPosition: 'bottom',
+    animationEnabled: true,
+    
     tabBarOptions: {
         indicatorStyle: {backgroundColor: 'transparent'},
         showIcon: true,

@@ -1,6 +1,7 @@
 export default {
     home: {
         isLoading: false,
+        isLoadingMore: false,
         data: [],
     },
     login: {
@@ -14,4 +15,8 @@ export default {
         status: 0,
         user: {},
     },
+    trend:{
+        isLoading: false,
+        data: {},
+    }
 }

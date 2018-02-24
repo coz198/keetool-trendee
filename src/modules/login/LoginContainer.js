@@ -8,7 +8,7 @@ import {
     StyleSheet,
     Dimensions,
     KeyboardAvoidingView,
-    StatusBar, Alert
+    StatusBar, Alert, ActivityIndicator
 } from 'react-native';
 import {Container, Form, Item, Input} from 'native-base';
 import styles from "../../styles/styles";
@@ -25,7 +25,41 @@ class LoginContainer extends Component {
     constructor(props) {
         super(props);
     }
+    // componentWillMount() {
+    //     this.props.loginAction.getDataLogin(this.props.status);
+    // }
 
+    saveData() {
+        this.props.loginAction.setDataLogin(this.props.login)
+    }
+
+    signIn() {
+        let reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+        if (this.props.login.email == '' || this.props.login.password == '') {
+            Alert.alert("Có lỗi xảy ra", "Bạn cần nhập đầy đủ thông tin ");
+        } else if (reg.test(this.props.login.email) == false) {
+            Alert.alert("Có lỗi xảy ra", "Địa chỉ email không hợp lệ")
+        } else {
+            this.props.loginAction.loginUser(this.props.login);
+            this.saveData();
+        }
+    }
+    updateData(name, value) {
+        let login = this.props.login;
+        login[name] = value;
+        this.props.loginAction.updateDataLogin(login);
+    }
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.status == 200) {
+            const resetAction = NavigationActions.reset({
+                index: 0,
+                actions: [
+                    NavigationActions.navigate({routeName: 'Home'})
+                ]
+            })
+            this.props.navigation.dispatch(resetAction)
+        }
+    }
     render() {
         const {navigate} = this.props.navigation;
         return (
@@ -36,19 +70,23 @@ class LoginContainer extends Component {
                     style={styles.wrapperContainer}
                 >
                     <View style={[{flex: 4, alignItems: 'center'}]}>
+                        <IconLoop/>
                         <Text style={styleLogin.textLogo}>
                             SPREADY
                         </Text>
                     </View>
                     {/*<IconLoop/>*/}
                     <View style={[{flex: 6, alignItems: 'center', justifyContent: 'space-between', padding: 20}]}>
-                        <Form style={{marginTop: 10}}>
+                        <Form style={[{marginTop: 10}, styles.wrapperCenter]}>
                             <Item style={[{marginRight: 15, borderColor: '#FFF'}, styleLogin.inputLogin]}>
                                 <Input style={[styles.textDescriptionLight]}
                                        placeholderTextColor={'#FFF'}
                                        placeholder="User Name"
                                        keyboardType={'email-address'}
-
+                                       onChangeText={(email) => {
+                                        this.updateData('email', email);
+                                    }}
+                                    value={this.props.login.email}
                                 />
                             </Item>
                             <Item style={[{marginRight: 15, borderColor: '#FFF'}, styleLogin.inputLogin]}>
@@ -57,9 +95,34 @@ class LoginContainer extends Component {
                                        placeholder="Password"
                                        returnKeyType={'go'}
                                        secureTextEntry={true}
+                                       onChangeText={(password) => {
+                                        this.updateData('password', password);
+                                    }}
+                                    value={this.props.login.password}
+
 
                                 />
                             </Item>
+                            <TouchableOpacity
+                                style={[styleLogin.buttonLogin, styles.wrapperCenter, {marginTop: 30}]}
+                                onPress={() => {
+                                    this.signIn()
+                                }}
+                                >
+                                {(this.props.isLoading) ? (
+                                <ActivityIndicator
+                                    animated={true}
+                                    color={"#FFF"}
+                                    style={{
+                                        height: 20,
+                                    }}
+                                    size='small'
+                                />
+                            ) : (
+                              <Text style={styles.textDescriptionLight}>LOG IN</Text>
+                            )
+                            }
+                            </TouchableOpacity>
                         </Form>
                         <View style={styles.wrapperCenter}>
                             <TouchableOpacity
@@ -88,7 +151,6 @@ class LoginContainer extends Component {
                         <View/>
                     </View>
                 </LinearGradient>
-
             </Container>
 
 
@@ -128,6 +190,13 @@ const styleLogin = StyleSheet.create({
         fontFamily: 'Montserrat-Bold',
         fontSize: 30,
         letterSpacing: 5,
+    },
+    buttonLogin:{
+        alignItems: 'center',
+        padding: 10,
+        paddingLeft: 20,
+        borderRadius: 50,
+        width: size.deviceWidth * 0.7,
     },
     buttonLoginFacebook:{
         alignItems: 'center',

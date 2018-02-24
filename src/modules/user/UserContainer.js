@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import {
     Image,
     Text,
@@ -10,14 +10,14 @@ import {
     KeyboardAvoidingView
 } from 'react-native';
 import IconDefault from '../../commons/IconDefault'
-import {Container, Content} from 'native-base';
+import { Container, Content } from 'native-base';
 import styles from "../../styles/styles";
 import Loading from "../../commons/Loading";
 import BackButton from "../../commons/BackButton";
 import Activity from "./Activity";
 import WishList from "./WishList";
 import Invitation from "./Invitation";
-import {connect} from "react-redux";
+import { connect } from "react-redux";
 import ParallaxScrollView from 'react-native-parallax-scroll-view';
 import parallaxStyle from '../../styles/parallaxStyle';
 import * as size from '../../styles/sizes';
@@ -33,13 +33,13 @@ class UserContainer extends Component {
     }
     View(tab) {
         setTimeout(() => {
-            this.setState({isLoadingState: false})
+            this.setState({ isLoadingState: false })
         }, 100);
-        this.setState({tab: tab, isLoadingState: true})
+        this.setState({ tab: tab, isLoadingState: true })
     }
     ViewTab() {
-        const {navigate} = this.props.navigation;
-        const {goBack} = this.props.navigation;
+        const { navigate } = this.props.navigation;
+        const { goBack } = this.props.navigation;
         switch (this.state.tab) {
             case 0:
                 return (
@@ -49,7 +49,7 @@ class UserContainer extends Component {
                         data={this.props.data}
                     />
                 );
-            case 1 :
+            case 1:
                 return (
                     <WishList
                         navigate={navigate}
@@ -58,7 +58,7 @@ class UserContainer extends Component {
                     />
 
                 );
-            case 2 :
+            case 2:
                 return (
                     <Invitation
                         navigate={navigate}
@@ -68,10 +68,11 @@ class UserContainer extends Component {
                 );
         }
     }
-    render () {
-        const {navigate} = this.props.navigation;
-        const {goBack} = this.props.navigation;
-        const {isLoadingState, tab} = this.state;
+    render() {
+        const { navigate } = this.props.navigation;
+        const { goBack } = this.props.navigation;
+        const { user } = this.props;
+        const { isLoadingState, tab } = this.state;
 
         return (
             <Container style={styles.wrapperContainer}>
@@ -83,28 +84,32 @@ class UserContainer extends Component {
                     parallaxHeaderHeight={size.deviceHeight / 3.5}
                     backgroundSpeed={10}
                     renderForeground={() => (
-                        <View style={[styles.wrapperCenter, styles.imageFullWidth, {marginTop: 10}]}>
+                        <View style={[styles.wrapperCenter, styles.imageFullWidth, { marginTop: 10 }]}>
                             <Image
                                 style={styles.imageCircleBig}
-                                source={{uri: 'https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?auto=format&fit=crop&w=334&q=60&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D'}}
+                                source={{ uri: user.avatar_url }}
                             />
-                            <Text style={[styles.textTitleDark, styles.paddingLine, {marginTop: 10}]}>Cong</Text>
-                            <Text style={styles.textDescriptionGray}>60 Activities</Text>
+                            <Text style={[styles.textTitleDark, styles.paddingLine, { marginTop: 10 }]}>
+                                {user.name}
+                            </Text>
+                            <Text style={styles.textDescriptionGray}>
+                                {user.description}
+                            </Text>
                         </View>
                     )}
                     renderStickyHeader={() => (
                         <View key="sticky-header" style={parallaxStyle.stickySection}>
                             <View
-                                style={[styles.wrapperCenter, Platform.OS === 'ios' ? {marginTop: 30} : {marginTop: 20}]}>
-                                <Text style={[styles.textTitleDark, {paddingLeft: 50, paddingRight: 50}]}
-                                      numberOfLines={1}>
-                                    CONG
+                                style={[styles.wrapperCenter, Platform.OS === 'ios' ? { marginTop: 30 } : { marginTop: 20 }]}>
+                                <Text style={[styles.textTitleDark, { paddingLeft: 50, paddingRight: 50 }]}
+                                    numberOfLines={1}>
+                                    {user.name}
                                 </Text>
                             </View>
                         </View>
                     )}
                     renderFixedHeader={() => (
-                        <View style={{position: "absolute", top: 20, flex: 1, left: 20}}>
+                        <View style={{ position: "absolute", top: 20, flex: 1, left: 20 }}>
                             <BackButton
                                 goBack={goBack}
                                 color={'#000'}
@@ -138,7 +143,7 @@ class UserContainer extends Component {
                         {
                             isLoadingState
                                 ?
-                                <Loading/>
+                                <Loading />
                                 :
                                 this.ViewTab()
                         }
@@ -151,7 +156,7 @@ class UserContainer extends Component {
 
 function mapStateToProps(state) {
     return {
-        data: state.home.data
+        user: state.login.user,
     }
 }
 
